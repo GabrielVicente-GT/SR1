@@ -29,15 +29,14 @@ class Render(object):
     def __init__(self, width, height):
             self.width  = width
             self.heigth = height
-            self.window_color   =  BLACK
-            self.viewport_color =  BLACK
-            self.point_color =  BLACK
+            self.current_color   =  BLACK
+
             # self.framebuffer = []
             self.clear()
 
     def clear(self):
         self.framebuffer = [
-            [ self.window_color for x in range(self.width)]
+            [ self.current_color for x in range(self.width)]
             for y in range(self.heigth)
         ]
 
@@ -76,7 +75,5 @@ class Render(object):
         f.close()
 
     def point(self, x, y):
-        self.framebuffer[x][y] = self.viewport_color
-        
-    def uniquepoint(self, x, y):
-        self.framebuffer[x][y] = self.point_color
+        self.framebuffer[y][x] = self.current_color
+

@@ -30,6 +30,8 @@ def glCreateWindow(width, height):
     
 #Se crea la ventana donde se trabajara el punto
 def glViewPort(x, y, width, height):
+    global renderizado
+    renderizado.current_color = Render.color(round(255*0), round(255*0), round(255*0))
 
     #posicion desde la que se crea el view port
     #Se crea desde la esquina inferior izquierda
@@ -74,7 +76,7 @@ def glClear():
 #Se cambia el color predeterminado
 def glClearColor(r, g, b):
     global renderizado
-    renderizado.window_color = Render.color(round(255*r), round(255*g), round(255*b))
+    renderizado.current_color = Render.color(round(255*r), round(255*g), round(255*b))
 
 #Se dibuja un punto en las cordenadas especificas (respetando el viewport)
 def glVertex(x, y):
@@ -106,12 +108,12 @@ def glVertex(x, y):
     if puntomedidoX == (xPositionVP +widthVP):
         
         puntomedidoX = puntomedidoX -1
-    renderizado.uniquepoint(puntomedidoY,puntomedidoX)
+    renderizado.point(puntomedidoX,puntomedidoY)
 
 #Se cambia el color con el que se dibuja el punto
 def glColor(r, g, b):
     global renderizado
-    renderizado.point_color = Render.color(round(255*r), round(255*g), round(255*b))
+    renderizado.current_color = Render.color(round(255*r), round(255*g), round(255*b))
 
 #Se escribe el archivo
 def glFinish():
